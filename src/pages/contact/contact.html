@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>รายชื่อติดต่อ</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="add()"><ion-icon name="person-add"></ion-icon></button>
+  </ion-fab>
+  <ion-toolbar color="primary">
+    <ion-searchbar (ionInput)="search($event)" debounce="1000"></ion-searchbar>
+  </ion-toolbar>
+  <ion-item-group>
+    <!--<ion-item-divider>Contact list</ion-item-divider>-->
+    <ion-list>
+    <ion-item-sliding *ngFor="let contact of contacts">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="./assets/img/man.png" *ngIf="contact.sex == '1'">
+          <img src="./assets/img/woman.png" *ngIf="contact.sex == '2'">
+        </ion-avatar>
+        <h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
+        <p>Tel. {{ contact.telephone }}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button (click)="edit(contact)">
+          <ion-icon name="create"></ion-icon>
+          แก้ไข
+        </button>
+        <button ion-button [disabled]="!contact.telephone" (click)="callPhone(contact.telephone)">
+          <ion-icon name="call"></ion-icon>
+          โทร
+        </button>
+      </ion-item-options>
+      <ion-item-options side="left">
+        <button ion-button color="danger" (click)="remove(contact)">
+          <ion-icon name="trash"></ion-icon>
+          ลบ
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  </ion-item-group>
+</ion-content>

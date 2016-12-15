@@ -1,0 +1,43 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{ customerName }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="page-map">
+
+  <ion-fab top right edge>
+    <button ion-fab color="danger"><ion-icon name="map"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)="getCurrentLocation()"><ion-icon name="locate"></ion-icon></button>
+      <button ion-fab (click)="launchNavigator()" [disabled]="!customerLat"><ion-icon name="navigate"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+<sebm-google-map
+  [latitude]="lat"
+  [longitude]="lng"
+  (mapClick)="mapClick($event)"
+  [zoom]="zoomLevel"
+  mapTypeControl="true"
+  zoomControl="false"
+  scaleControl="true"
+  scrollwheel="true">
+  <sebm-google-map-marker [latitude]="customerLat" [longitude]="customerLng"></sebm-google-map-marker>
+</sebm-google-map>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <p>{{ customerLat }} , {{ customerLng }}</p>
+    <ion-buttons end>
+      <button ion-button icon-only color="primary" (click)="save()" [disabled]="!customerLat || !customerLng">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

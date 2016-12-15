@@ -1,0 +1,30 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>ข้อความ</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+<ion-item-group>
+    <ion-item-divider color="light">ส่งข้อความ (Send message)</ion-item-divider>
+    <ion-item>
+      <ion-label>เลือกผู้ใช้งาน</ion-label>
+      <ion-select [(ngModel)]="userId">
+        <ion-option [value]="user.id" *ngFor="let user of users">{{ user.fullname }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>ข้อความ</ion-label>
+      <ion-input type="text" [(ngModel)]="message"></ion-input>
+    </ion-item>
+    <div padding>
+      <button ion-button block color="primary" (click)="sendMessage()" [disabled]="!userId || !message">
+        ส่งข้อความ
+      </button>
+    </div>
+  </ion-item-group>
+
+</ion-content>
